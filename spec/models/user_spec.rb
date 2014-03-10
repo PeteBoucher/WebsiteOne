@@ -243,4 +243,26 @@ describe User do
     end
 
   end
+
+  describe 'project commits' do
+    before :each do
+      @user = build(:user)
+      @projects = [stub_model(Project, id: 1,title: 'Title', description: 'Description', status: 'Status')]
+      @user.stub(:following_by_type).and_return(@projects)
+    end
+
+    it 'should return an enpty hash when a user follows no projects (sad path)' do 
+      @user.stub(:following_by_type).and_return([])
+      expect(@user.project_commits).to eq({})
+    end
+
+    it 'should return a hash with zero commits when a user has started following projects' do 
+      expect(@user.project_commits).to eq({1 => 0}) 
+    end
+
+    it 'should return a hash containing a list of projects with commits' do
+      # figure out where to store the latest commit count from GitHub
+      expect(@user.project_commits).to eq({1 => 25})
+    end
+  end
 end

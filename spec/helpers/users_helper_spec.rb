@@ -28,31 +28,30 @@ describe UsersHelper do
     end
   end
 
-  describe 'Github' do
-    it 'get commit count for a user and a list of projects' do
-      projects = [double(Project, id: '1'), double(Project, id: '2')]
-      commit_count = {'1' => 20, '2' => 30, '3' => 50}
-      user = double(User)
+  # describe 'Github' do
+  #   it 'get commit count for a user and a list of projects' do
+  #     projects = [double(Project, id: '1'), double(Project, id: '2')]
+  #     commit_count = {'1' => 20, '2' => 30, '3' => 50}
+  #     user = double(User)
 
-      expect(Github.get_project_stats(user, projects)).to eq(commit_count)
-    end
+  #     expect(Github.get_project_stats(user, projects)).to eq(commit_count)
+  #   end
 
-    it 'calls gihub to get specific repo statistics for a particular user' do
-      user = double(User)
-      project = double(Project, id: '1')
-      Github.stub(repo_stats: {})
+  #   it 'calls gihub to get specific repo statistics for a particular user' do
+  #     user = double(User)
+  #     project = double(Project, id: '1')
+  #     Github.stub(repo_stats: {})
 
-      expect(Github.get_commits(user, project)).to eq(50)
-    end
+  #     expect(Github.get_commits(user, project)).to eq(50)
+  #   end
 
-    it '#get_stats for a Github repo' do
-      github_repo_stats = File.read('spec/fixtures/github_hello_jupiter_response.json')
-      stats = JSON.parse(github_repo_stats)
+  #   it '#get_stats for a Github repo' do
+  #     github_repo_stats = File.read('spec/fixtures/github_hello_jupiter_response.json')
+  #     stats = JSON.parse(github_repo_stats)
 
-      Github.repos_stats('hello_jupiter').to eq(stats)
-    end
-
-  end
+  #     Github.repos_stats('hello_jupiter').to eq(stats)
+  #   end
+  # end
 
 end
 
