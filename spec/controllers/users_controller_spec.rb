@@ -42,6 +42,7 @@ describe UsersController do
       )
       @user.stub(:following_by_type).and_return(@projects)
       User.stub_chain(:friendly, :find).and_return(@user)
+      @user.stub(:contributions).and_return({1 => 50})
 
       @youtube_videos = [
           {
