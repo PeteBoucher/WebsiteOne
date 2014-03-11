@@ -24,7 +24,9 @@ class User < ActiveRecord::Base
   after_validation :geocode, if: ->(obj){ obj.last_sign_in_ip }
 
   has_many :authentications, dependent: :destroy
-  has_many :projects
+  #TODO PB to check these relations
+  has_many :projects # user owns many projects by creating them
+  has_many :projects, through: :contributions 
   has_many :documents
   has_many :articles
 

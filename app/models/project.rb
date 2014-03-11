@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   validates :title, :description, :status, presence: true
   acts_as_followable
   belongs_to :user
+  has_many :users, through: :contributions
   has_many :documents
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
